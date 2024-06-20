@@ -58,6 +58,6 @@ ResUnetPlusPlus uses the Unet architecture as a base but adds residual elements 
 
 To run the training step of ResUnetPlusPlus for testing with a smaller epoch size (3), you need to do the below step.
 ```bash
-$ python runresnetplusplus_train.py
+$ python runresnetplusplus_train.py --epochs=3
 ```
 Again, you need to download the dataset into ./data folder which has train and valid directories with images and masks.
