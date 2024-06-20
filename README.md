@@ -56,4 +56,8 @@ Unet was developed for biomedical image segmentation and is used for problems re
 
 ResUnetPlusPlus uses the Unet architecture as a base but adds residual elements to it.  ResUnetPlusPlus builds on the Unet architecture making it require more computational time to run.
 
-
+To run the training step of ResUnetPlusPlus for testing with a smaller epoch size (3), you need to do the below step.
+```bash
+$ python runresnetplusplus_train.py
+```
+Again, you need to download the dataset into ./data folder which has train and valid directories with images and masks.
