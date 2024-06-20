@@ -18,7 +18,7 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 
 Tutorial slides: https://drive.google.com/drive/folders/1rewCO1tVbE4rAat8VsCc-bKpNuEHUnNY?usp=sharing
 
-Data download: [Google Drive link](https://drive.google.com/file/d/1CswpE-MkQKTEhiVh1hnacv8PBla2JuxN/view?usp=sharing)
+Data download: [Google Drive link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
 
 ## Installation and Setup
 
@@ -48,7 +48,7 @@ already have an account to access the download. Proceed to run and install the p
 
 The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation. Instead of cloning the original git, let us use this updated codes for easy testing. 
 
-We will test Kvasir-SEG data set ([paper](https://arxiv.org/abs/1911.07069), [data webpage](https://datasets.simula.no/kvasir-seg/)). Kvasir-SEG data set contains 1000 images that come from colonoscopy videos where the image size ranges from 332x487 to 1920x1072 pixels. Each image is pared with a mask which shows where the polp occurs. We split the data into training (880) and testing (120) sets. The split data is available to download from [Google Drive link](https://drive.google.com/file/d/1CswpE-MkQKTEhiVh1hnacv8PBla2JuxN/view?usp=sharing).
+We will test Kvasir-SEG data set ([paper](https://arxiv.org/abs/1911.07069), [data webpage](https://datasets.simula.no/kvasir-seg/)). Kvasir-SEG data set contains 1000 images that come from colonoscopy videos where the image size ranges from 332x487 to 1920x1072 pixels. Each image is pared with a mask which shows where the polp occurs. We split the data into training (880) and validation (120) sets. The split data is available to download from [Google Drive link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
 
 The diverse sizes of the images are corrected by a built in program which reduces the size of the images to a uniform 256x256 pixels.  This is done by cropping and resizing the images using cv2. 
 
