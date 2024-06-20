@@ -49,5 +49,6 @@ already have an account to access the download. Proceed to run and install the p
 The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation.
 
 
-The U-Net model architecture is
+The U-Net model architecture:
+
 
