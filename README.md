@@ -18,7 +18,7 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 
 Tutorial slides: https://drive.google.com/drive/folders/1rewCO1tVbE4rAat8VsCc-bKpNuEHUnNY?usp=sharing
 
-Data download: Google Drive link
+Data download: [Google Drive link](https://drive.google.com/file/d/1CswpE-MkQKTEhiVh1hnacv8PBla2JuxN/view?usp=sharing)
 
 ## Installation and Setup
 
@@ -30,7 +30,7 @@ mkdir Lab
 cd Lab
 ```
 
-To begin, start a terminal from JupyterHub and clone this repository with:
+To begin, start a terminal and clone this repository with:
 ```bash
 git clone https://github.com/BioHPC/GIST-AI-HPC-2024.git
 ```
@@ -46,9 +46,14 @@ already have an account to access the download. Proceed to run and install the p
 
 ## Model, data, and training code overview
 
-The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation.
+The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation. Instead of cloning the original git, let us use this updated codes for easy testing. 
 
+We will test Kvasir-SEG data set ([paper](https://arxiv.org/abs/1911.07069), [data webpage](https://datasets.simula.no/kvasir-seg/)). Kvasir-SEG data set contains 1000 images that come from colonoscopy videos where the image size ranges from 332x487 to 1920x1072 pixels. Each image is pared with a mask which shows where the polp occurs. We split the data into training (880) and testing (120) sets. The split data is available to download from [Google Drive link](https://drive.google.com/file/d/1CswpE-MkQKTEhiVh1hnacv8PBla2JuxN/view?usp=sharing).
 
-The U-Net model architecture: is
+The diverse sizes of the images are corrected by a built in program which reduces the size of the images to a uniform 256x256 pixels.  This is done by cropping and resizing the images using cv2. 
+
+Unet was developed for biomedical image segmentation and is used for problems related but not limited to image segmentation problems.  Unet model take input images and labeled masks for said images.  The name Unet describes the general shape of the model used to create the machine learning model.  This architecture consists of an encode which is responsible for extracting significant features from our input images.  The decoder section up samples intermediate features and constructing the final output.  These two sections are symmetrical in size and are connected to each other.  These connection help connect the extracted features of the encoder to the corresponding decoders features.  
+
+ResUnetPlusPlus uses the Unet architecture as a base but adds residual elements to it.  ResUnetPlusPlus builds on the Unet architecture making it require more computational time to run.
 
 
