@@ -19,7 +19,7 @@ gpus = tf.config.list_physical_devices('GPU')
 if gpus:
     try:
         # choose gpu
-        tf.config.set_visible_devices(gpus[3], 'GPU')
+        tf.config.set_visible_devices(gpus[0], 'GPU')
         logical_gpus = tf.config.list_logical_devices('GPU')
         print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
     except RuntimeError as e:
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     except:
         pass
 
-    test_path = "new_data/Kvasir-SEG27/test/"
+    test_path = "data/Kvasir-SEG/test/"
 
     # testing
     test_image_paths = glob(os.path.join(test_path, "images", "*"))

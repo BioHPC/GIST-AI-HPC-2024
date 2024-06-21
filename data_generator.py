@@ -17,7 +17,7 @@ def parse_image(img_path, image_size):
     return image_rgb
 
 def parse_mask(mask_path, image_size):
-    mask = cv2.imread(mask_path, -1)
+    mask = cv2.imread(mask_path, 0)
     h, w = mask.shape
     if (h == image_size) and (w == image_size):
         pass
