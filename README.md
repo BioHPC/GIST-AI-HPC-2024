@@ -24,7 +24,27 @@ Most of the code and resources are shared in this GitHub repository.
 
 ## Installation and Setup Required Software
 
-### Software environment
+### Software environment (Skip this step -- All requirements are pre-installed)
+
+We have set up all requirements previously.
+
+Many packages are required including
+```
+os
+numpy
+cv2
+tensorflow
+glob
+tqdm
+```
+
+To install such requirments easily, you can create a conda environment with the provided "environment.yml"
+
+```bash
+conda env create -f environment.yml -n tf-gpu
+```
+
+Also, you can check the requirments.txt if you would like to set-up venv environment without using conda. 
 
 Once logged into the MobileX, start a terminal and create a lab parent directory
 ```bash
@@ -41,10 +61,17 @@ In your terminal, change to the directory with
 cd GIST-AI-HPC-2024
 ```
 
-### Installing Nsight Systems (Skip this step if Nsight System is already installed)
+Download the dataset from [Google Link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing).
+
+Decompress (unzip) it.
+
+Kvasir-SEG dataset shoud has three directories: train, valid and test. 
+
+### Installing Nsight Systems (Skip this step -- Nsight System is already installed)
 In this tutorial, we will be generating profile files using NVIDIA Nsight Systems on thesystem. In order to open and view the
-files on your local computer, you will need to install the Nsight Systems program, which you can download [here](https://developer.nvidia.com/gameworksdownload#?search=nsight%20systems). Select the download option required for your system (e.g. Mac OS host for MacOS, Window Host for Windows, or Linux Host .rpm/.deb/.run for Linux). You may need to sign up and create a login to NVIDIA's developer program if you do not
-already have an account to access the download. Proceed to run and install the program using your selected installation method.
+files on your local computer, you will need to install the Nsight Systems program, which you can download [here](https://developer.nvidia.com/gameworksdownload#?search=nsight%20systems). Select the download option required for your system (e.g. Mac OS host for MacOS, Window Host for Windows, or Linux Host .rpm/.deb/.run for Linux). 
+You may need to sign up and create a login to NVIDIA's developer program if you do not already have an account to access the download. Proceed to run and install the program using your selected installation method.
+
 
 ### Using NVIDIA Nsight Systems to optimize deep learning on the GPU 
 #### Overview
