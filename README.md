@@ -48,35 +48,35 @@ already have an account to access the download. Proceed to run and install the p
 #### Overview
 NVIDIA Nsight Systems is a comprehensive performance analysis tool that provides detailed insights into your application’s runtime behavior. By leveraging Nsight Systems, you can optimize deep learning workloads on the GPU, ensuring efficient resource utilization and improved performance. This tool is particularly useful for identifying bottlenecks, understanding GPU utilization, and optimizing multi-threaded CPU-GPU interactions.
 ##### Key Features
-• System-Wide Performance Analysis: Nsight Systems offers a complete view of your system’s performance, encompassing CPU, GPU, OS runtime libraries, and more.\
-• Thread and Process Visualization: Gain insights into how threads and processes interact with each other and with the GPU, helping you to identify synchronization issues and optimize parallel execution.\
-• CUDA Activity Tracking: Monitor GPU activities, including memory transfers, kernel executions, and CUDA API calls, to understand and enhance GPU utilization.\
-• Profiler Overhead: Minimal overhead ensures that the profiling process does not significantly impact the performance of your application, allowing for accurate measurements.\
+• System-Wide Performance Analysis: Nsight Systems offers a complete view of your system’s performance, encompassing CPU, GPU, OS runtime libraries, and more.
+• Thread and Process Visualization: Gain insights into how threads and processes interact with each other and with the GPU, helping you to identify synchronization issues and optimize parallel execution.
+• CUDA Activity Tracking: Monitor GPU activities, including memory transfers, kernel executions, and CUDA API calls, to understand and enhance GPU utilization.
+• Profiler Overhead: Minimal overhead ensures that the profiling process does not significantly impact the performance of your application, allowing for accurate measurements.
 
 #### Using NVIDIA Nsight Systems
-1. Installation: Install NVIDIA Nsight Systems from the NVIDIA website or through package managers like apt or yum for Linux.\
-2. Profiling Your Application: Use the nsys command-line tool to profile your deep learning application. For example:\
-   bash\
-   Copy code\
-   nsys profile --trace=cuda,osrt --output=my_profile_report ./my_deep_learning_script.py\
-3. Analyzing the Report: Open the generated report file (.nsys-rep) in the Nsight Systems GUI. The GUI provides an intuitive timeline view and detailed breakdown of your application’s performance.\
-4. Identifying Bottlenecks: Examine the timeline for periods of inactivity or excessive synchronization waits. Look for warnings and messages that indicate potential issues.\
-5. Optimization: Based on the analysis, optimize your data pipeline, kernel launches, and thread synchronization to enhance overall performance.\
+1. Installation: Install NVIDIA Nsight Systems from the NVIDIA website or through package managers like apt or yum for Linux.
+2. Profiling Your Application: Use the nsys command-line tool to profile your deep learning application. For example:
+   bash
+   Copy code
+   nsys profile --trace=cuda,osrt --output=my_profile_report ./my_deep_learning_script.py
+3. Analyzing the Report: Open the generated report file (.nsys-rep) in the Nsight Systems GUI. The GUI provides an intuitive timeline view and detailed breakdown of your application’s performance.
+4. Identifying Bottlenecks: Examine the timeline for periods of inactivity or excessive synchronization waits. Look for warnings and messages that indicate potential issues.
+5. Optimization: Based on the analysis, optimize your data pipeline, kernel launches, and thread synchronization to enhance overall performance.
 #### Example: Profiling a TensorFlow Model
 ##### Here’s a basic example of how to profile a TensorFlow model training script using Nsight Systems:
-1. Prepare your script: Ensure your deep learning script is ready for profiling. For example:\
-   python\
-   Copy code\
-   import tensorflow as tf\
-    ... (rest of your deep learning code)\
-   \
-   \
-2. Profile the script:\
-   nsys profile --trace=cuda,osrt --output=model_training_report python train_model.py\
-3. Analyze the Report:\
-    ◦ Open model_training_report.qdrep in the Nsight Systems GUI.\
-    ◦ Review the timeline to identify GPU activity, thread interactions, and any periods of idle time.\
-    ◦ Optimize your script based on the insights gained.\
+1. Prepare your script: Ensure your deep learning script is ready for profiling. For example:
+   python
+   Copy code
+   import tensorflow as tf
+    ... (rest of your deep learning code)
+   
+   
+2. Profile the script:
+   nsys profile --trace=cuda,osrt --output=model_training_report python train_model.py
+3. Analyze the Report:
+    ◦ Open model_training_report.qdrep in the Nsight Systems GUI.
+    ◦ Review the timeline to identify GPU activity, thread interactions, and any periods of idle time.
+    ◦ Optimize your script based on the insights gained.
 
 ##### Example Report
 ![alt text](https://github.com/BioHPC/GIST-AI-HPC-2024/blob/main/nsys_training_report_screenshot.png)
