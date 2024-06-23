@@ -5,8 +5,8 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 *Deep Learning with HPC.
 
 **Contents**
-* [Links](#links)
-* [Installation](#installation-and-setup)
+* [Tutorial Materials](#tutorial-materials)
+* [Installation and Setup Required Software](#installation-and-setup)
 * [Model, data, and code overview](#model-data-and-training-code-overview)
 * [Single GPU training](#single-gpu-training)
 * [Single GPU performance](#single-gpu-performance-profiling-and-optimization)
@@ -14,13 +14,15 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 * [Multi GPU performance](#multi-gpu-performance-profiling-and-optimization)
 * [Putting it all together](#putting-it-all-together)
 
-## Links
+## Tutorial Materials
 
-Tutorial slides: https://drive.google.com/drive/folders/1rewCO1tVbE4rAat8VsCc-bKpNuEHUnNY?usp=sharing
+Most of the code and resources are shared in this GitHub repository. 
 
-Data download: [Google Drive link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
+[Tutorial slides Goole Drive](https://drive.google.com/drive/folders/1rewCO1tVbE4rAat8VsCc-bKpNuEHUnNY?usp=sharing)
 
-## Installation and Setup
+[Data Google Drive Link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
+
+## Installation and Setup Required Software
 
 ### Software environment
 
