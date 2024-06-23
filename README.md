@@ -6,10 +6,10 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 
 **Contents**
 * [Tutorial Materials](#tutorial-materials)
-* [Installation and Setup Required Software](#installation-and-setup)
+* [Installation and Setup Requirements](#installation-and-setup-requirements)
 * [Model, data, and code overview](#model-data-and-training-code-overview)
 * [Single GPU training](#single-gpu-training)
-* [Single GPU performance](#single-gpu-performance-profiling-and-optimization)
+* [Single GPU performance and Optimization](#single-gpu-performance-profiling-and-optimization)
 * [Distributed training](#distributed-gpu-training)
 * [Multi GPU performance](#multi-gpu-performance-profiling-and-optimization)
 * [Putting it all together](#putting-it-all-together)
@@ -22,7 +22,7 @@ Most of the code and resources are shared in this GitHub repository.
 
 [Data Google Drive Link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
 
-## Installation and Setup Required Software
+## Installation and Setup Requirements
 
 ### Software environment (Skip this step -- All requirements are pre-installed)
 
@@ -45,6 +45,8 @@ conda env create -f environment.yml -n tf-gpu
 ```
 
 Also, you can check the requirments.txt if you would like to set-up venv environment without using conda. 
+
+### Tutorial resources and data setup (You have to do)
 
 Once logged into the MobileX, start a terminal and create a lab parent directory
 ```bash
@@ -73,8 +75,38 @@ files on your local computer, you will need to install the Nsight Systems progra
 You may need to sign up and create a login to NVIDIA's developer program if you do not already have an account to access the download. Proceed to run and install the program using your selected installation method.
 
 
+## Model, data, and training code overview
+
+The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation. Instead of cloning the original git, let us use this updated codes for easy testing. 
+
+We will test Kvasir-SEG data set ([paper](https://arxiv.org/abs/1911.07069), [data webpage](https://datasets.simula.no/kvasir-seg/)). Kvasir-SEG data set contains 1000 images that come from colonoscopy videos where the image size ranges from 332x487 to 1920x1072 pixels. Each image is pared with a mask which shows where the polp occurs. We split the data into training (880) and validation (120) sets. The split data is available to download from [Google Drive link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
+
+The diverse sizes of the images are corrected by a built in program which reduces the size of the images to a uniform 256x256 pixels.  This is done by cropping and resizing the images using cv2. 
+
+Unet was developed for biomedical image segmentation and is used for problems related but not limited to image segmentation problems.  Unet model take input images and labeled masks for said images.  The name Unet describes the general shape of the model used to create the machine learning model.  This architecture consists of an encode which is responsible for extracting significant features from our input images.  The decoder section up samples intermediate features and constructing the final output.  These two sections are symmetrical in size and are connected to each other.  These connection help connect the extracted features of the encoder to the corresponding decoders features.  
+
+ResUnetPlusPlus uses the Unet architecture as a base but adds residual elements to it.  ResUnetPlusPlus builds on the Unet architecture making it require more computational time to run.
+
+## Single GPU training
+
+To test the training step of ResUnetPlusPlus for testing with a smaller epoch size (3), you need to do the below step.
+```bash
+$ python runresnetplusplus_train.py --epochs=3
+```
+Again, you need to download the dataset into ./data folder which has train and valid directories with images and masks.
+
+If you haven't received an error, let us run a default script (epochs = 100)
+
+```bash
+$ python runresnetplusplus_train.py 
+```
+
+## Single GPU performance and Optimization
+
 ### Using NVIDIA Nsight Systems to optimize deep learning on the GPU 
+
 #### Overview
+
 NVIDIA Nsight Systems is a comprehensive performance analysis tool that provides detailed insights into your application’s runtime behavior. By leveraging Nsight Systems, you can optimize deep learning workloads on the GPU, ensuring efficient resource utilization and improved performance. This tool is particularly useful for identifying bottlenecks, understanding GPU utilization, and optimizing multi-threaded CPU-GPU interactions.
 ##### Key Features
 • System-Wide Performance Analysis: Nsight Systems offers a complete view of your system’s performance, encompassing CPU, GPU, OS runtime libraries, and more.
@@ -118,20 +150,3 @@ NVIDIA Nsight Systems is a comprehensive performance analysis tool that provides
 
 
 
-## Model, data, and training code overview
-
-The model in this repository is adapted from a ResUNetPlusPlus application of deep learning ([Jha el al. 2019](https://ieeexplore.ieee.org/document/8959021), [GitHub](https://github.com/DebeshJha/ResUNetPlusPlus)) model for Colorectal Polyp Segmentation. Instead of cloning the original git, let us use this updated codes for easy testing. 
-
-We will test Kvasir-SEG data set ([paper](https://arxiv.org/abs/1911.07069), [data webpage](https://datasets.simula.no/kvasir-seg/)). Kvasir-SEG data set contains 1000 images that come from colonoscopy videos where the image size ranges from 332x487 to 1920x1072 pixels. Each image is pared with a mask which shows where the polp occurs. We split the data into training (880) and validation (120) sets. The split data is available to download from [Google Drive link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing)
-
-The diverse sizes of the images are corrected by a built in program which reduces the size of the images to a uniform 256x256 pixels.  This is done by cropping and resizing the images using cv2. 
-
-Unet was developed for biomedical image segmentation and is used for problems related but not limited to image segmentation problems.  Unet model take input images and labeled masks for said images.  The name Unet describes the general shape of the model used to create the machine learning model.  This architecture consists of an encode which is responsible for extracting significant features from our input images.  The decoder section up samples intermediate features and constructing the final output.  These two sections are symmetrical in size and are connected to each other.  These connection help connect the extracted features of the encoder to the corresponding decoders features.  
-
-ResUnetPlusPlus uses the Unet architecture as a base but adds residual elements to it.  ResUnetPlusPlus builds on the Unet architecture making it require more computational time to run.
-
-To run the training step of ResUnetPlusPlus for testing with a smaller epoch size (3), you need to do the below step.
-```bash
-$ python runresnetplusplus_train.py --epochs=3
-```
-Again, you need to download the dataset into ./data folder which has train and valid directories with images and masks.
