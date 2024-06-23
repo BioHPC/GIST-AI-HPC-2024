@@ -42,6 +42,7 @@ To install such requirments easily, you can create a conda environment with the 
 
 ```bash
 conda env create -f environment.yml -n tf-gpu
+conda activate tf-gpu
 ```
 
 Also, you can check the requirments.txt if you would like to set-up venv environment without using conda. 
