@@ -2,4 +2,4 @@ Download the dataset from [Google Link](https://drive.google.com/drive/folders/1
 
 Decompress (unzip) it.
 
-Kvasir-SEG dataset has two directories: train and valid. 
+Kvasir-SEG dataset has three directories: train, valid and test. 
