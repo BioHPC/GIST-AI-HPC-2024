@@ -63,9 +63,12 @@ In your terminal, change to the directory with
 cd GIST-AI-HPC-2024
 ```
 
-Download the dataset from [Google Link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing).
+Download the dataset (Kvasir-SEG.zip) from [Google Link](https://drive.google.com/drive/folders/1Ebs1zbAdwSWioZLMCorfn8Q5DLoChRYo?usp=sharing) and move the file into ~/Lab/GIST-AI-HPC-2024/data/ directory.
 
 Decompress (unzip) it.
+```bash
+unzip Kvasir-SEG.zip
+```
 
 Kvasir-SEG dataset shoud has three directories: train, valid and test. 
 
