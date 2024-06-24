@@ -78,6 +78,26 @@ In this tutorial, we will be generating profile files using NVIDIA Nsight System
 files on your local computer, you will need to install the Nsight Systems program, which you can download [here](https://developer.nvidia.com/gameworksdownload#?search=nsight%20systems). Select the download option required for your system (e.g. Mac OS host for MacOS, Window Host for Windows, or Linux Host .rpm/.deb/.run for Linux). 
 You may need to sign up and create a login to NVIDIA's developer program if you do not already have an account to access the download. Proceed to run and install the program using your selected installation method.
 
+### Additional Steps for Windows Users
+
+1. **Update NVIDIA Drivers:**
+   - Ensure your NVIDIA drivers are up-to-date. You can download the latest drivers from the [NVIDIA website](https://www.nvidia.com/Download/index.aspx).
+
+2. **Check CUDA and cuDNN:**
+   - Make sure CUDA and cuDNN are properly installed and are compatible with each other.
+   - You can download CUDA [here](https://developer.nvidia.com/cuda-downloads).
+   - You can download cuDNN [here](https://developer.nvidia.com/cudnn).
+   - Add the paths to CUDA and cuDNN to your system variables.
+
+3. **Verify GPU Access:**
+   - Ensure that PyTorch and TensorFlow can properly access the GPU.
+
+4. **Install Nsight Systems:**
+   - Download and install Nsight Systems for Windows [here](https://developer.nvidia.com/gameworksdownload#?search=nsight%20systems).
+   - Add the path to `nsys.exe` (Nsight Systems executable) to your system variables. This executable is usually located in the `target-windows-x64` or `host-windows-x64` directory within the Nsight Systems installation path.
+
+By following these steps, you will be able to successfully install and use NVIDIA Nsight Systems on your local computer to view and analyze profile files.
+
 
 ## Model, data, and training code overview
 
