@@ -143,6 +143,7 @@ NVIDIA Nsight Systems is a comprehensive performance analysis tool that provides
 2. Profiling Your Application: Use the nsys command-line tool to profile your deep learning application. For example:
    bash
    Copy code
+   ```sh
    nsys profile --trace=cuda,osrt --output=my_profile_report ./my_deep_learning_script.py
 3. Analyzing the Report: Open the generated report file (.nsys-rep) in the Nsight Systems GUI. The GUI provides an intuitive timeline view and detailed breakdown of your application’s performance.
 4. Identifying Bottlenecks: Examine the timeline for periods of inactivity or excessive synchronization waits. Look for warnings and messages that indicate potential issues.
@@ -157,11 +158,14 @@ NVIDIA Nsight Systems is a comprehensive performance analysis tool that provides
    
    
 2. Profile the script:
-   nsys profile --trace=cuda,osrt --output=model_training_report python train_model.py
-3. Analyze the Report:
-    ◦ Open model_training_report.qdrep in the Nsight Systems GUI.
-    ◦ Review the timeline to identify GPU activity, thread interactions, and any periods of idle time.
-    ◦ Optimize your script based on the insights gained.
+   - `nsys profile --trace=cuda,osrt --output=model_training_report python train_model.py`
+   - For Windows Users osrt is not a recognized trace argument. Instead, use the following command:
+   - `nsys profile --trace=cuda --output=model_training_report python train_model.py`
+
+4. Analyze the Report:
+    - Open model_training_report.qdrep in the Nsight Systems GUI.
+    - Review the timeline to identify GPU activity, thread interactions, and any periods of idle time.
+    - Optimize your script based on the insights gained.
 
 ##### Example Report
 ![alt text](https://github.com/BioHPC/GIST-AI-HPC-2024/blob/main/nsys_training_report_screenshot.png)
