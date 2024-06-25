@@ -26,14 +26,14 @@ Most of the code and resources are shared in this GitHub repository.
 
 ### Software environment (Skip this step -- All requirements are pre-installed)
 
-We have set up all requirements previously.
+We have set up all requirements previously. The main requirements are cudatoolkit=11.8, cudnn=8.8 (and 8.7), tensorflow 2.14 (2.13). 
 
 Many packages are required including
 ```
 os
 numpy
 cv2
-tensorflow
+tensorflow (2.14)
 glob
 tqdm
 ```
@@ -84,7 +84,7 @@ You may need to sign up and create a login to NVIDIA's developer program if you 
    - Ensure your NVIDIA drivers are up-to-date. You can download the latest drivers from the [NVIDIA website](https://www.nvidia.com/Download/index.aspx).
 
 2. **Check CUDA and cuDNN:**
-   - Make sure CUDA and cuDNN are properly installed and are compatible with each other.
+   - Make sure CUDAToolkit (11.8 preferred) and cuDNN (8.7) are properly installed and are compatible with each other.
    - You can download CUDA [here](https://developer.nvidia.com/cuda-downloads).
    - You can download cuDNN [here](https://developer.nvidia.com/cudnn).
    - Add the paths to CUDA and cuDNN to your system variables.
