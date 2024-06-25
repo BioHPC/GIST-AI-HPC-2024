@@ -124,6 +124,13 @@ $ python runresnetplusplus_train.py --epochs=3
 ```
 Again, you need to download the dataset into ./data folder which has train and valid directories with images and masks.
 
+runresnetplusplus_train.py code train the model using GPU resource. Let us compare running time with CPU mode.
+
+```bash
+$ python runresnetplusplus_train.py --epochs=3
+```
+Quesiton: What is the difference in execution time between CPU and GPU modes?
+
 If you haven't received an error, let us run a default script (epochs = 100)
 
 ```bash
