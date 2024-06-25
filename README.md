@@ -221,7 +221,13 @@ nsys profile -t nvtx,cuda -o nsys_report_4.2.nsys-rep python 4.2_runresnetpluspl
 ```
 
 ### DataLoader Change
-The previous script used a custom data generator (DataGen), while the second script directly uses TensorFlow’s tf.data.Dataset API to load and preprocess the data.
+The previous script used a custom data generator (DataGen), while the second script directly uses TensorFlow’s tf.data.Dataset API to load and preprocess the data. 
+
+Please check the code
+
+```base
+5.1_runresnetplusplusseg_train_tfDataloader.py
+```
 
 Previous:
 ```bash
