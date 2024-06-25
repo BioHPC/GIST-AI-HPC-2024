@@ -1,6 +1,6 @@
+import tensorflow as tf
 import os
 import numpy as np
-import tensorflow as tf
 import cv2
 from glob import glob
 from data_generator import DataGen
@@ -8,18 +8,26 @@ from tensorflow.keras.models import load_model
 from metrics import dice_coef, dice_loss
 import time
 
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-    try:
-        tf.config.set_visible_devices(gpus[0], 'GPU')
-        logical_gpus = tf.config.list_logical_devices('GPU')
-        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
-    except RuntimeError as e:
-        print(e)
-
 start_time = tf.timestamp()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Test model.')
+    parser.add_argument('--device', type=str, default='GPU', choices=['CPU', 'GPU'], help='Device to use for training (CPU or GPU)')
+    args = parser.parse_args()
+
+    if args.device == 'CPU':
+        tf.config.set_visible_devices([], 'GPU')
+        print("Using CPU for training")
+    else:
+        gpus = tf.config.list_physical_devices('GPU')
+        if gpus:
+            try:
+                tf.config.set_visible_devices(gpus[0], 'GPU')
+                logical_gpus = tf.config.list_logical_devices('GPU')
+                print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+            except RuntimeError as e:
+                print(e)
+
     model_path = "files/resunetplusplus_kvasir-SEG_epoch100.h5"
     test_path = "data/Kvasir-SEG/test/"
 

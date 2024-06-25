@@ -11,21 +11,27 @@ from metrics import dice_coef, dice_loss
 import argparse
 import time
 
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-    try:
-        tf.config.set_visible_devices(gpus[0], 'GPU')
-        logical_gpus = tf.config.list_logical_devices('GPU')
-        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
-    except RuntimeError as e:
-        print(e)
-
-start_time = tf.timestamp()
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train ResUnet++ model.')
     parser.add_argument('--epochs', type=int, default=100, help='Number of epochs to train the model')
+    parser.add_argument('--device', type=str, default='GPU', choices=['CPU', 'GPU'], help='Device to use for training (CPU or GPU)')
     args = parser.parse_args()
+
+    if args.device == 'CPU':
+        tf.config.set_visible_devices([], 'GPU')
+        print("Using CPU for training")
+    else:
+        gpus = tf.config.list_physical_devices('GPU')
+        if gpus:
+            try:
+                tf.config.set_visible_devices(gpus[0], 'GPU')
+                logical_gpus = tf.config.list_logical_devices('GPU')
+                print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+            except RuntimeError as e:
+                print(e)
+    
+    start_time = tf.timestamp()
+
     file_path = "files/"
     model_path = "files/resunetplusplus_kvasir-SEG_epoch100.h5"
     try:
@@ -80,7 +86,7 @@ if __name__ == "__main__":
               epochs=epochs,
               callbacks=callbacks)
 
-end_time = tf.timestamp()
-final_time = end_time - start_time
-print(f"Total time taken: {final_time} seconds")
+    end_time = tf.timestamp()
+    final_time = end_time - start_time
+    print(f"Total time taken: {final_time} seconds")
 
