@@ -9,9 +9,8 @@ This repository contains the example code material for the GIST-AI-HPC-2024 tuto
 * [Installation and Setup Requirements](#installation-and-setup-requirements)
 * [Model, data, and code overview](#model-data-and-training-code-overview)
 * [Single GPU training](#single-gpu-training)
-* [Single GPU performance and Optimization](#single-gpu-performance-profiling-and-optimization)
-* [Distributed training](#distributed-gpu-training)
-* [Multi GPU performance](#multi-gpu-performance-profiling-and-optimization)
+* [Single GPU performance and Optimization](#single-gpu-performance-and-optimization)
+* [Multi GPU training and performance](#multi-gpu-training-and-performance)
 * [Putting it all together](#putting-it-all-together)
 
 ## Tutorial Materials
@@ -291,5 +290,5 @@ Impact:
 - Using tf.data.Dataset can lead to more concise and potentially faster data handling, as TensorFlow can optimize the data pipeline more effectively.
 
 
-
-
+## Multi GPU training and performance
+Please refer slides
