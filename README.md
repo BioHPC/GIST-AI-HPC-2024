@@ -49,7 +49,12 @@ Also, you can check the requirements.txt if you would like to set-up a python ve
 
 ### Tutorial resources and data setup (You have to do)
 
-Once logged into the MobileX, start a terminal and create a lab parent directory
+Once logged into the MobileX, start a terminal. You have to activate pre-built conda environment "tf-gpu"
+```bash
+conda activate tf-gpu
+```
+
+Create a lab parent directory
 ```bash
 mkdir Lab
 cd Lab
