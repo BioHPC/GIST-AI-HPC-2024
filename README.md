@@ -134,10 +134,31 @@ Quesiton: What is the difference in execution time between CPU and GPU modes?
 If you haven't received an error, let us run a default script (epochs = 100)
 
 ```bash
-$ python runresnetplusplus_train.py 
+python runresnetplusplus_train.py 
 ```
 
 ## Single GPU performance and Optimization
+
+### Monitoring GPUs
+
+#### The NVIDIA System Management Interface (nvidia-smi)
+The basic check is
+```bash
+nvidia-smi
+watch -n 1 nvidia-smi
+```
+The number after -n is the time interval, so if you type 1, you're telling it to update every second.
+
+#### NVITop 
+NVITop is a powerful monitoring tool designed specifically for NVIDIA GPUs. It is similar in concept to the traditional top command-line utility, but it is tailored to provide detailed information about the usage of NVIDIA GPUs on a system. NVITop is typically used in environments where multiple GPUs are employed, such as high-performance computing clusters, deep learning workstations, and data centers.
+
+Install and run:
+```bash
+pip install nvitop 
+nvitop
+```
+![alt text](https://github.com/BioHPC/GIST-AI-HPC-2024/blob/main/nvitop.png)
+
 
 ### Using NVIDIA Nsight Systems to optimize deep learning on the GPU 
 
