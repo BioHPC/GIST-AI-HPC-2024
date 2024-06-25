@@ -205,4 +205,91 @@ nsys profile --trace=cuda --output=model_training.nsys-rep python runresnetplusp
       
 ##### By incorporating NVIDIA Nsight Systems into your optimization workflow, you can achieve significant improvements in the performance and efficiency of your deep learning models on the GPU. This tool is essential for developers aiming to leverage the full potential of GPU acceleration in their deep-learning applications.
 
+##### Adding NVTX Annotations (Skip this step by limited time! Just explain using slides!)
+
+NVTX ranges can be used to annotate:
+
+large general code regions (training step/epoch, file I/O, etc) 
+
+targeted code locations suspected of leading to GPU idle time
+
+4.1_runresnetplusplusseg_train_nvtx.py and 4.2_runresnetplusplusseg_test_nvtx.py 
+Added nvtx blocks for nsys profile
+
+```bash
+nsys profile -t nvtx,cuda -o nsys_report_4.1.nsys-rep python 4.1_runresnetplusplusseg_train.py --epochs 100
+nsys profile -t nvtx,cuda -o nsys_report_4.2.nsys-rep python 4.2_runresnetplusplusseg_test.py
+```
+
+### DataLoader Change
+The previous script used a custom data generator (DataGen), while the second script directly uses TensorFlow’s tf.data.Dataset API to load and preprocess the data.
+
+Previous:
+```bash
+from data_generator import DataGen ... ## Generator nvtx.push_range("DataGen initialization") train_gen = DataGen(image_size, train_image_paths, train_mask_paths, batch_size=batch_size) valid_gen = DataGen(image_size, valid_image_paths, valid_mask_paths, batch_size=batch_size) nvtx.pop_range()
+```
+
+Updated:
+```bash
+# Removed DataGen import
+def parse_image(img_path, image_size):
+    image_rgb = tf.io.read_file(img_path)
+    image_rgb = tf.image.decode_jpeg(image_rgb, channels=3)
+    image_rgb = tf.image.resize(image_rgb, [image_size, image_size])
+    image_rgb = tf.cast(image_rgb, tf.float32) / 255.0
+    return image_rgb
+
+def parse_mask(mask_path, image_size):
+    mask = tf.io.read_file(mask_path)
+    mask = tf.image.decode_jpeg(mask, channels=1)
+    mask = tf.image.resize(mask, [image_size, image_size])
+    mask = tf.cast(mask, tf.float32) / 255.0
+    return mask
+
+def load_data(image_paths, mask_paths, image_size):
+    images = tf.data.Dataset.from_tensor_slices(image_paths)
+    masks = tf.data.Dataset.from_tensor_slices(mask_paths)
+    images = images.map(lambda x: parse_image(x, image_size), num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    masks = masks.map(lambda x: parse_mask(x, image_size), num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    dataset = tf.data.Dataset.zip((images, masks))
+    return dataset
+
+def prepare_dataset(dataset, batch_size):
+    dataset = dataset.shuffle(buffer_size=1000)
+    dataset = dataset.batch(batch_size)
+    dataset = dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+    return dataset
+...
+    train_dataset = load_data(train_image_paths, train_mask_paths, image_size)
+    valid_dataset = load_data(valid_image_paths, valid_mask_paths, image_size)
+
+    train_dataset = prepare_dataset(train_dataset, batch_size)
+    valid_dataset = prepare_dataset(valid_dataset, batch_size)
+```
+
+The tf.data.Dataset API is more integrated with TensorFlow and can be more efficient due to its optimizations (e.g., parallel data loading, prefetching).
+
+The removal of DataGen simplifies the code and removes a dependency, making it more self-contained.
+
+Previous:
+```bash
+model.fit(train_gen, validation_data=valid_gen, steps_per_epoch=train_steps, validation_steps=valid_steps, epochs=epochs, callbacks=callbacks)
+```
+
+Updated:
+```bash
+model.fit(train_dataset,
+          validation_data=valid_dataset,
+          epochs=epochs,
+          callbacks=callbacks)
+```
+
+Impact:
+
+- The previous script specifies steps_per_epoch and validation_steps, which are necessary for generators but not for tf.data.Dataset.
+- The second script uses tf.data.Dataset objects (train_dataset and valid_dataset), which manage their own iteration without needing explicit steps per epoch.
+- Using tf.data.Dataset can lead to more concise and potentially faster data handling, as TensorFlow can optimize the data pipeline more effectively.
+
+
+
 
