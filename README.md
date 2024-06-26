@@ -297,4 +297,9 @@ Impact:
 
 
 ## Multi GPU training and performance
-Please refer slides
+
+Test Environment: Log-in to [sandbox.openhpc.kr](sandbox.openhpc.kr)
+
+Cheetah Manual: [openhpc.kr/cheetah-document/v2.4](openhpc.kr/cheetah-document/v2.4)
+
+Please refer to the slides for the tutorial!
